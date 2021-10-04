@@ -18,20 +18,19 @@ class memo extends REST_Controller
     }
     public function index_get(){
 
-        $nomor_surat = $this->get('nomor_surat', 'klasifikasi_id');
+        $nomor_surat = $this->get('nomor_surat');
         if($nomor_surat === null){
            $sima = $this->sima->getMemo(); 
         }    
         else{
             $sima = $this->sima->getMemo($nomor_surat);
         } 
-        if($klasifikasi_id === null){
-           $sima = $this->sima->getMemo(); 
-        }    
-        else{
-            $sima = $this->sima->getMemo($klasifikasi_id);
-        }    
-        var_dump($mahasiswa);
+        // if($klasifikasi_id === null){
+        //    $sima = $this->sima->getMemo(); 
+        // }    
+        // else{
+        //     $sima = $this->sima->getMemo($klasifikasi_id);
+        // } 
 
         if($sima){
             $this->response([
