@@ -3,15 +3,16 @@
 class memo_model extends CI_Model
 {
     public function getMemo($nomor_surat=null){
+        $klasifikasi = '36bf7435-0a0a-4de4-836c-2155ae0cf156';
         if($nomor_surat===null){
-            $this->db->select('u.id, u.name, app.surat_id, app.approved_at, app.file_lampiran, memo.perihal, memo.nomor_surat');
+            $this->db->select('u.id, u.name, app.surat_id, memo.no_registrasi, app.approved_at, app.file_lampiran, memo.perihal, memo.nomor_surat,memo.klasifikasi_id');
             $this->db->from('users as u');
             $this->db->join('approval_sins as app', 'u.id = app.user_id');
             $this->db->join('sin_memorandums as memo', 'app.surat_id = memo.id');
-           
+           $this->db->where_in('memo.klasifikasi_id', $klasifikasi);
             return $this->db->get()->result_array();
         } else{
-            $this->db->select('u.id, u.name, app.surat_id, app.approved_at, app.file_lampiran, memo.perihal, memo.nomor_surat');
+            $this->db->select('u.id, u.name, app.surat_id, memo.no_registrasi, app.approved_at, app.file_lampiran, memo.perihal, memo.nomor_surat, memo.klasifikasi_id');
             $this->db->from('users as u');
             $this->db->join('approval_sins as app', 'u.id = app.user_id');
             $this->db->join('sin_memorandums as memo', 'app.surat_id = memo.id');
