@@ -12,7 +12,7 @@ class Memo extends REST_Controller
     public function __Construct()
     {
         parent::__Construct();
-        $this->load->model('memo_model', 'sima');
+        $this->load->model('Memo_model', 'sima');//
 
         // $this->methods['index_get']['limit'] = 10;
     }
@@ -20,22 +20,17 @@ class Memo extends REST_Controller
 
         $nomor_surat = $this->get('nomor_surat');
         if($nomor_surat === null){
-           $sima = $this->sima->getMemo(); 
+           $sima = $this->sima->getMemo();
         }    
         else{
             $sima = $this->sima->getMemo($nomor_surat);
         } 
-        // if($klasifikasi_id === null){
-        //    $sima = $this->sima->getMemo(); 
-        // }    
-        // else{
-        //     $sima = $this->sima->getMemo($klasifikasi_id);
-        // } 
 
         if($sima){
+            
             $this->response([
                 'status' => TRUE,
-                'data' => $sima
+                'data' => $sima,
             ], REST_Controller::HTTP_OK); 
         } else{
             $this->response([
@@ -43,6 +38,7 @@ class Memo extends REST_Controller
                 'message' => 'nomor surat not found'
             ], REST_Controller::HTTP_NOT_FOUND);
         }
+        
     }
 
     public function index_delete(){
@@ -92,7 +88,6 @@ class Memo extends REST_Controller
             ], REST_Controller::HTTP_BAD_REQUEST);
         }
     }
-
     // public function index_put()
     // {
     //     $id = $this->put('id');
@@ -115,5 +110,4 @@ class Memo extends REST_Controller
     //         ], REST_Controller::HTTP_BAD_REQUEST);
     //     }
     // }
-
 }

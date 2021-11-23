@@ -7,6 +7,7 @@ require APPPATH . 'libraries/Format.php';
 
 class Disposisi extends REST_Controller
 {
+    private $secretkey = 'njkdsfkdsjfklj43AD4rf';//
     public function __Construct()
     {
         parent::__Construct();
@@ -24,9 +25,10 @@ class Disposisi extends REST_Controller
         }
 
         if($dispo){
+            
             $this->response([
                 'status' => TRUE,
-                'data' => $dispo
+                'data' => $dispo,
             ], REST_Controller::HTTP_OK); 
         } else{
             $this->response([
@@ -34,5 +36,7 @@ class Disposisi extends REST_Controller
                 'message' => 'nomor surat not found'
             ], REST_Controller::HTTP_NOT_FOUND);
         }
+        
+        
     }
 }
