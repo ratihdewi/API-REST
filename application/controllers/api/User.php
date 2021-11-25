@@ -16,12 +16,12 @@ class User extends REST_Controller
 
     public function index_get()
     {
-        $id = $this->get('id');
-        if($id === null){
+        $nip = $this->get('nip');
+        if($nip === null){
            $jabatan = $this->jabatan->getJabatan(); 
         }    
         else{
-            $jabatan = $this->jabatan->getJabatan($id);
+            $jabatan = $this->jabatan->getJabatan($nip);
         }
 
         if($jabatan){
