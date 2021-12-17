@@ -1,34 +1,40 @@
 <?php
 
 defined('BASEPATH') OR exit('No direct script access allowed');
+header('Access-Control-Allow-Methods: GET, POST, PATCH, PUT, DELETE, OPTIONS');
+header('Access-Control-Allow-Origin: *');
+header('Access-Control-Allow-Headers: Origin, Content-Type, Authorization');
 
 require APPPATH . 'libraries/REST_Controller.php';
 require APPPATH . 'libraries/Format.php';
 
+use \Firebase\JWT\JWT;
+
 class Jabatan extends REST_Controller
 {
-    private $secretkey = 'njkdsfkdsjfklj43AD4rf';
+    private $secretkey = 'Reckless';
+    private $table      = 'timesheets';
+
     public function __Construct()
     {
         parent::__Construct();
-        $this->load->model('Jabatan_model', 'jabatan');
+        $this->load->model('Jabatan_model', 'organisasi');
     }
 
     public function index_get()
     {
         $id = $this->get('id');
         if($id === null){
-           $jabatan = $this->jabatan->getJabatan(); 
+           $organisasi = $this->organisasi->getJabatan(); 
         }    
         else{
-            $jabatan = $this->jabatan->getJabatan($id);
+            $organisasi = $this->organisasi->getJabatan($id);
         }
 
-        if($jabatan){
-            
+        if($organisasi){
             $this->response([
                 'status' => TRUE,
-                'data' => $jabatan,
+                'data' => $organisasi,
             ], REST_Controller::HTTP_OK); 
         } else{
             $this->response([

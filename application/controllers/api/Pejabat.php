@@ -5,26 +5,27 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 require APPPATH . 'libraries/REST_Controller.php';
 require APPPATH . 'libraries/Format.php';
 
-class Organisasi extends REST_Controller
+class Pejabat extends REST_Controller
 {
-    private $secretkey = 'Reckless';
+    private $secretkey = 'njkdsfkdsjfklj43AD4rf';
     public function __Construct()
     {
         parent::__Construct();
-        $this->load->model('Organisasi_model', 'jabatan');
+        $this->load->model('Pejabat_model', 'jabatan');
     }
 
     public function index_get()
     {
-        $sso_username = $this->get('sso_username');
-        if($sso_username === null){
+        $id = $this->get('id');
+        if($id === null){
            $jabatan = $this->jabatan->getJabatan(); 
         }    
         else{
-            $jabatan = $this->jabatan->getJabatan($sso_username);
+            $jabatan = $this->jabatan->getJabatan($id);
         }
 
         if($jabatan){
+            
             $this->response([
                 'status' => TRUE,
                 'data' => $jabatan,
@@ -34,7 +35,8 @@ class Organisasi extends REST_Controller
                 'status' => false,
                 'message' => 'Jabatan not found'
             ], REST_Controller::HTTP_NOT_FOUND);
-        }        
+        }
+        
         
     }
 }
