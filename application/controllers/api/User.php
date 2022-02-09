@@ -14,7 +14,7 @@ class User extends REST_Controller
         $this->load->model('User_model', 'jabatan');
     }
 
-    public function index_get()
+    public function index_post()
     {
         $nip = $this->get('nip');
         if($nip === null){
