@@ -9,6 +9,7 @@ class Memo_model extends CI_Model
             $this->db->join('sin_memorandums as memo', 'u.id = memo.kepada_id');
             $this->db->join('klasifikasi_permasalahans as klasifikasi', 'klasifikasi.id=memo.klasifikasi_id');
             $this->db->like('klasifikasi.kode', 'BJ');
+            $this->db->order_by('tgl_surat', 'desc');
             return $this->db->get()->result_array();
         } else{
             $this->db->select('memo.kepada_id, u.name, memo.no_registrasi, memo.perihal, memo.dari, memo.nomor_surat, memo.klasifikasi_id, klasifikasi.jenis_arsip, klasifikasi.kode');
@@ -16,6 +17,7 @@ class Memo_model extends CI_Model
             $this->db->join('sin_memorandums as memo', 'u.id = memo.kepada_id');
             $this->db->join('klasifikasi_permasalahans as klasifikasi', 'klasifikasi.id=memo.klasifikasi_id');
             $this->db->like('klasifikasi.kode', 'BJ');
+            $this->db->order_by('tgl_surat', 'desc');
             $this->db->where('memo.nomor_surat', $nomor_surat);
 
             return $this->db->get_where()->result_array();

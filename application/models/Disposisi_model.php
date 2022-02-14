@@ -14,6 +14,7 @@ class Disposisi_model extends CI_Model
             $this->db->join('klasifikasi_permasalahans as klasifikasi', 'klasifikasi.id=memo.klasifikasi_id');
             // $this->db->join('notifications as notif', 'u.id = notif.id');
             $this->db->like('klasifikasi.kode', 'BJ');
+            $this->db->order_by('tgl_surat', 'desc');
             // $this->db->like('notif.data', '273');
             return $this->db->get()->result_array();
         } else{
@@ -27,6 +28,7 @@ class Disposisi_model extends CI_Model
             $this->db->join('klasifikasi_permasalahans as klasifikasi', 'klasifikasi.id=memo.klasifikasi_id');
             // $this->db->join('notifications as notif', 'u.id = notif.id');
             $this->db->like('klasifikasi.kode', 'BJ');
+            $this->db->order_by('tgl_surat', 'desc');
             // $this->db->where_in('memo.klasifikasi_id', $klasifikasi);
             $this->db->where('memo.nomor_surat', $nomor_surat);
 
