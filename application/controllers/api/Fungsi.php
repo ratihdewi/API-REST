@@ -5,38 +5,36 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 require APPPATH . 'libraries/REST_Controller.php';
 require APPPATH . 'libraries/Format.php';
 
-class User extends REST_Controller
+class Fungsi extends REST_Controller
 {
     private $secretkey = 'njkdsfkdsjfklj43AD4rf';
     public function __Construct()
     {
         parent::__Construct();
-        header('Access-Control-Allow-Origin: *');
-        header("Access-Control-Allow-Headers: X-API-KEY, Origin, X-Requested-With, Content-Type, Accept, Access-Control-Request-Method");
-        header("Access-Control-Allow-Methods: GET, POST, OPTIONS, PUT, DELETE");
-        $this->load->model('User_model', 'jabatan');
+        $this->hris = $this->load->database('hris', TRUE);
+        $this->load->model('Fungsi_model', 'unit');
     }
 
     public function index_post()
     {
-        $nip = $this->get('nip');
-        if($nip === null){
-           $jabatan = $this->jabatan->getJabatan(); 
+        $id = $this->get('id');
+        if($id === null){
+           $unit = $this->unit->getFungsi(); 
         }    
         else{
-            $jabatan = $this->jabatan->getJabatan($nip);
+            $unit = $this->unit->getFungsi($id);
         }
 
-        if($jabatan){
+        if($unit){
             
             $this->response([
                 'status' => TRUE,
-                'data' => $jabatan,
+                'data' => $unit,
             ], REST_Controller::HTTP_OK); 
         } else{
             $this->response([
                 'status' => false,
-                'message' => 'Jabatan not found'
+                'message' => 'Unit kerja not found'
             ], REST_Controller::HTTP_NOT_FOUND);
         }
         
